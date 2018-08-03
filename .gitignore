@@ -1,4 +1,3 @@
-dddd/*
 # IntelliJ project files
 .idea
 *.iml
@@ -7,4 +6,4 @@ dddd/*
 out
 gen
 node_modules
-venv
+
