@@ -4,7 +4,6 @@ import requests
 from bs4 import BeautifulSoup
 import time
 
-from python.OperationDb import OperationDb
 
 DOWNLOAD_URL = 'https://movie.douban.com/top250?start=0'
 

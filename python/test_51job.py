@@ -1,18 +1,20 @@
 # _*_ coding=utf-8 _*_
 
 import sys
+from imp import reload
+
 import requests
 from bs4 import BeautifulSoup
 import time
-import MySQLdb as mysql
+import pymysql  as mysql
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
 DOWNLOAD_URL = 'https://search.51job.com/list/020000,000000,0000,32,9,99,%2B,2,1.html?lang=c&stype=1&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=&dibiaoid=0&address=&line=&specialarea=00&from=&welfare='
 
 
 def parse51_html(html):
-    db = mysql.connect(host="127.0.0.1", port=3306, user="", passwd="", db="test", charset="utf8")
+    db = mysql.connect(host="127.0.0.1", port=3306, user="root", passwd="root", db="test", charset="utf8")
     cursor = db.cursor()
 
     soup = BeautifulSoup(html.text, 'html.parser')
@@ -46,12 +48,12 @@ def parse51_html(html):
             try:
                 cursor.execute(sql)
                 db.commit()
-            except Exception, e:
-                print e.message
+            except Exception as e:
+                print(e.message)
                 db.rollback()
 
             time.sleep(0.02)
-        except Exception, e:
+        except Exception as e:
             print(e.message)
             continue
 
@@ -75,8 +77,8 @@ def parse_company_info(url):
         if comyany_contacts is not None:
             comyany_contacts = comyany_contacts.strip()
         return comyany_contacts
-    except Exception, e:
-        print e.message, url
+    except Exception as e:
+        print(e.message, url)
 
 
 def main():

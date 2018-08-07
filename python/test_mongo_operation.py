@@ -4,7 +4,7 @@
 
 from pymongo import MongoClient
 
-conn = MongoClient('192.168.23.204', 20001)
+conn = MongoClient('', )
 db = conn.test
 today_news = db.today_news
 
